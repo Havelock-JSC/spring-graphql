@@ -487,7 +487,7 @@ public class GraphQlWebSocketHandler extends TextWebSocketHandler implements Sub
 
 		SessionState(String graphQlSessionId, WebMvcSessionInfo sessionInfo) {
 			this.sessionInfo = sessionInfo;
-			this.scheduler = Schedulers.newSingle("GraphQL-WsSession-" + graphQlSessionId);
+			this.scheduler = Schedulers.newSingle(Thread.ofVirtual().name("GraphQL-WsSession-" + graphQlSessionId).factory());
 			this.keepAliveSubscriber = new KeepAliveSubscriber(sessionInfo.getSession());
 		}
 
